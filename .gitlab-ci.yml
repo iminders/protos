@@ -1,0 +1,29 @@
+
+# This file is to run gitlab-ci.
+stages:
+  - test
+  - clean_up
+
+variables:
+    OUTPUT_DIR: /workspace/output/github.com/iminders/protos/${CI_PIPELINE_ID}
+    IMAGE_PREFIX: aiminders/common_protos
+
+test:
+  stage: test
+  variables:
+    RSA_PRIVATE_KEY: "$RSA_PRIVATE_KEY"
+    BAZEL_USER_ROOT: '/workspace/cache/github.com/iminders/protos/bazel'
+  script:
+    - docker-compose -f docker-compose.yml run bazel
+  after_script:
+    - docker-compose -f docker-compose.yml down --remove-orphans
+  tags:
+    - aws-vpn
+
+clean_up:
+  stage: clean_up
+  script:
+    - echo OUTPUT_DIR ${OUTPUT_DIR}
+    - sudo rm -rf ${OUTPUT_DIR}
+  tags:
+    - aws-vpn

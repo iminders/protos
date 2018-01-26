@@ -1,0 +1,15 @@
+version: '2.0'
+
+services:
+  bazel:
+    image: aiminders/libary:bazel.0.7.0
+    environment:
+      RSA_PRIVATE_KEY:
+      HTTPS_PROXY:
+      HTTP_PROXY:
+    command:
+      bash /root/protos/docker-compose.sh
+    volumes:
+      - .:/root/protos
+      - ${BAZEL_USER_ROOT}:/root/cache/bazel
+      - ${OUTPUT_DIR}:/root/output

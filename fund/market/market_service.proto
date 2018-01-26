@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+import "fund/market/stock.proto";
+
+package market;
+
+message Market {
+  DayDuration day_duration = 1;
+  repeated string open_days = 2;
+  repeated StockBasic stock_basics = 3;
+}
+
+service MarketService {
+  // Buy or sell securities
+  rpc Bid(BidRequest) returns (BidResponse);
+  // Update market start date and end date
+  rpc Update(DayDuration) returns (Status);
+  // Get open days list of stock market order by time
+  rpc GetOpenDays(DayDuration) returns(GetOpenDaysResponse);
+  // Add a stock record
+  rpc AddRecord(AddRecordRequest) returns(Status);
+  // Delete record by code, duration
+  rpc DeleteRecord(DeleteRecordRequest) returns(Status);
+  // Delete record by duration
+  rpc DeleteDurationRecord(DeleteDurationRecordRequest) returns(Status);
+  // Delete record by code
+  rpc DeleteCodeRecord(DeleteCodeRecordRequest) returns(Status);
+  // Delete all record
+  rpc DeleteAllRecord(DeleteAllRecordRequest) returns(Status);
+}
+
+enum BidType {
+  SELL = 0;
+  BUY = 1;
+}
+
+enum Code {
+  OK = 0;
+  ERROR = 1;
+}
+
+message Status {
+  Code code = 1;
+  string service = 2;
+  string description = 3;
+}
+
+message Bid {
+  string code = 1;
+  int64 volume = 2;
+  double price = 3;
+  BidType bid_type = 4;
+}
+
+message BidRequest {
+  string request_id = 1;
+  repeated Bid bids = 2;
+}
+
+message BidResponse {
+  bool success = 1;
+  int64 volume = 2;
+  double price = 3;
+  double amount = 4;
+}
+
+message DayDuration {
+  // date format: YYYY-mm-dd
+  string start_date = 1;
+  string end_date = 2;
+}
+
+message GetOpenDaysResponse {
+  repeated string dates = 1;
+}
+
+message AddRecordRequest {
+  string request_id = 1;
+  string code = 2;
+  string date = 3;
+  BasicIndex basic_index = 4;
+}
+
+message DeleteRecordRequest {
+  string request_id = 1;
+  string code = 2;
+  DayDuration day_duration = 3;
+}
+
+message DeleteDurationRecordRequest {
+  string request_id = 1;
+  DayDuration day_duration = 2;
+}
+
+message DeleteCodeRecordRequest {
+  string request_id = 1;
+  string code = 2;
+}
+
+message DeleteAllRecordRequest {
+  string request_id = 1;
+}

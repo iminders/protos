@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package armory;
+
+message Hold {
+  string code = 1;
+  int64 volume = 2;
+}
+
+enum Stage {
+  Experiment = 0; // 实验阶段
+  Production = 1; // 上线运作
+}
+
+message User {
+  string user_name = 1;
+  repeated Hold holds = 2;
+  double inverstment = 3; // 投入资产
+  double total_assets = 4; // 总资产
+  double available = 5; // available money(可用资产)
+  double cap = 6; // market capitalization, market cap(市值)
+  repeated Performance performances = 7; // 表现
+  Stage stage = 8; // user所处阶断, Experiment/Production
+}
+
+message Performance {
+  string date = 1; // date of the performance
+  double roii = 2; // rate of inverstment income(收益率)
+  double max_draw_down = 3; // 最大回撤
+  double sucess_rate = 4 ; // 胜率
+}
