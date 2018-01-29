@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-import "fund/market/stock.proto";
-
 package market;
+
+import "fund/market/stock.proto";
 
 message Market {
   DayDuration day_duration = 1;
