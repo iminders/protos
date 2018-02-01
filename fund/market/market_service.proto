@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package market;
 
-option go_package = "github.com/iminders/protos/fund/market/market_service_proto";
-
 message MarketInfo {
   DayDuration day_duration = 1;
   repeated string open_days = 2;
