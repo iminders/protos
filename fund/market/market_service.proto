@@ -54,7 +54,7 @@ message Bid {
 
 message BidRequest {
   string request_id = 1;
-  repeated Bid bids = 2;
+  Bid bid = 2;
 }
 
 message BidResponse {
