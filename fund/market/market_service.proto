@@ -2,31 +2,29 @@ syntax = "proto3";
 
 package market;
 
-option go_package = "github.com/iminders/protos/fund/market/market_service_proto";
-
-message Market {
+message MarketInfo {
   DayDuration day_duration = 1;
   repeated string open_days = 2;
   repeated StockBasic stock_basics = 3;
 }
 
-service MarketService {
-  // Buy or sell securities
-  rpc Bid(BidRequest) returns (BidResponse);
-  // Update market start date and end date
-  rpc Update(DayDuration) returns (Status);
-  // Get open days list of stock market order by time
-  rpc GetOpenDays(DayDuration) returns(GetOpenDaysResponse);
-  // Add a stock record
-  rpc AddRecord(AddRecordRequest) returns(Status);
-  // Delete record by code, duration
-  rpc DeleteRecord(DeleteRecordRequest) returns(Status);
-  // Delete record by duration
-  rpc DeleteDurationRecord(DeleteDurationRecordRequest) returns(Status);
-  // Delete record by code
-  rpc DeleteCodeRecord(DeleteCodeRecordRequest) returns(Status);
-  // Delete all record
-  rpc DeleteAllRecord(DeleteAllRecordRequest) returns(Status);
+service Market {
+  // // Buy or sell securities
+  rpc Biding(BidRequest) returns (BidResponse);
+  // // Update market start date and end date
+  // rpc Update(DayDuration) returns (Status);
+  // // Get open days list of stock market order by time
+  // rpc GetOpenDays(DayDuration) returns(GetOpenDaysResponse);
+  // // Add a stock record
+  // rpc AddRecord(AddRecordRequest) returns(Status);
+  // // Delete record by code, duration
+  // rpc DeleteRecord(DeleteRecordRequest) returns(Status);
+  // // Delete record by duration
+  // rpc DeleteDurationRecord(DeleteDurationRecordRequest) returns(Status);
+  // // Delete record by code
+  // rpc DeleteCodeRecord(DeleteCodeRecordRequest) returns(Status);
+  // // Delete all record
+  // rpc DeleteAllRecord(DeleteAllRecordRequest) returns(Status);
 }
 
 enum BidType {

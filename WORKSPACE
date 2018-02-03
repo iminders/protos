@@ -40,7 +40,7 @@ go_repository(
 
 go_repository(
     name = "org_golang_google_grpc",
-    commit = "6b51017f791ae1cfbec89c52efdf444b13b550ef",
+    commit = "6913ad5caedced5d627918609375b057963334a5",
     importpath = "google.golang.org/grpc",
 )
 

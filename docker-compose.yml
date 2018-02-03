@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   bazel:
-    image: aiminders/libary:bazel.0.9.1
+    image: aiminders/libary:bazel.0.10.0
     environment:
       RSA_PRIVATE_KEY:
       HTTPS_PROXY:
