@@ -9,8 +9,8 @@ message MarketInfo {
 }
 
 service Market {
-  // Buy or sell securities
-  rpc Bid(BidRequest) returns (BidResponse);
+  // // Buy or sell securities
+  rpc Biding(BidRequest) returns (BidResponse);
   // // Update market start date and end date
   // rpc Update(DayDuration) returns (Status);
   // // Get open days list of stock market order by time

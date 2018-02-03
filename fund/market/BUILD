@@ -10,5 +10,4 @@ proto_library(
 go_grpc_library(
     name = "market_service_go_proto",
     proto = ":market_service_proto",
-    visibility = ["//visibility:public"],
 )
