@@ -5,8 +5,10 @@ package market;
 message MarketInfo {
   DayDuration day_duration = 1;
   repeated string open_days = 2;
+  // key: code , example: 000001
   map<string, StockBasic>  stock_basics = 3;
-  MarketRecords market_records = 4;
+  // key: date , format: YYYY-mm-dd
+  map<string, MarketDayRecord> market_recodes= 4;
 }
 
 service Market {
