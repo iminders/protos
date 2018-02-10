@@ -5,7 +5,8 @@ package market;
 message MarketInfo {
   DayDuration day_duration = 1;
   repeated string open_days = 2;
-  repeated StockBasic stock_basics = 3;
+  map<string, StockBasic>  stock_basics = 3;
+  MarketRecords market_records = 4;
 }
 
 service Market {
