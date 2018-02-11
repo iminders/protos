@@ -3,31 +3,23 @@ syntax = "proto3";
 package market;
 
 message MarketInfo {
-  DayDuration day_duration = 1;
-  repeated string open_days = 2;
   // key: code , example: 000001
-  map<string, StockBasic>  stock_basics = 3;
+  map<string, StockBasic>  stock_basics = 1;
   // key: date , format: YYYY-mm-dd
-  map<string, MarketDayRecord> market_recodes= 4;
+  map<string, MarketDayRecord> market_recordes = 2;
 }
 
 service Market {
-  // // Buy or sell securities
+  //  Buy or sell securities
   rpc Bid(BidRequest) returns (BidResponse);
-  // // Update market start date and end date
-  // rpc Update(DayDuration) returns (Status);
-  // // Get open days list of stock market order by time
-  // rpc GetOpenDays(DayDuration) returns(GetOpenDaysResponse);
-  // // Add a stock record
-  // rpc AddRecord(AddRecordRequest) returns(Status);
-  // // Delete record by code, duration
-  // rpc DeleteRecord(DeleteRecordRequest) returns(Status);
-  // // Delete record by duration
-  // rpc DeleteDurationRecord(DeleteDurationRecordRequest) returns(Status);
-  // // Delete record by code
-  // rpc DeleteCodeRecord(DeleteCodeRecordRequest) returns(Status);
-  // // Delete all record
-  // rpc DeleteAllRecord(DeleteAllRecordRequest) returns(Status);
+  //  Add a security record, if exist update it
+  rpc AddOrUpdateRecord(AddOrUpdateRecordRequest) returns(Status);
+  //  Add a security StockBasic, if exist update it
+  rpc AddOrUpdateStockBasic(AddOrUpdateStockBasicRequest) returns(Status);
+  // Delete record by code
+  rpc DeleteRecord(DeleteRecordRequest) returns(Status);
+  // Delete all record
+  rpc DeleteAllRecord(DeleteAllRecordRequest) returns(Status);
 }
 
 enum BidType {
@@ -38,6 +30,7 @@ enum BidType {
 enum Code {
   OK = 0;
   ERROR = 1;
+  NO_RECORD = 2;
 }
 
 message Status {
@@ -59,39 +52,20 @@ message BidRequest {
 }
 
 message BidResponse {
-  bool success = 1;
+  Status status = 1;
   int64 volume = 2;
   double price = 3;
   double amount = 4;
 }
 
-message DayDuration {
-  // date format: YYYY-mm-dd
-  string start_date = 1;
-  string end_date = 2;
-}
 
-message GetOpenDaysResponse {
-  repeated string dates = 1;
-}
-
-message AddRecordRequest {
+message AddOrUpdateRecordRequest {
   string request_id = 1;
   string code = 2;
   string date = 3;
   BasicIndex basic_index = 4;
 }
 
-message DeleteRecordRequest {
-  string request_id = 1;
-  string code = 2;
-  DayDuration day_duration = 3;
-}
-
-message DeleteDurationRecordRequest {
-  string request_id = 1;
-  DayDuration day_duration = 2;
-}
 
 message DeleteCodeRecordRequest {
   string request_id = 1;
@@ -101,7 +75,6 @@ message DeleteCodeRecordRequest {
 message DeleteAllRecordRequest {
   string request_id = 1;
 }
-
 
 message StockBasic {
   string code = 1; // 代码
