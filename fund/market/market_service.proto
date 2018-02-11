@@ -66,10 +66,16 @@ message AddOrUpdateRecordRequest {
   BasicIndex basic_index = 4;
 }
 
-
-message DeleteCodeRecordRequest {
+message AddOrUpdateStockBasicRequest {
   string request_id = 1;
   string code = 2;
+  StockBasic stock_basic = 3;
+}
+
+message DeleteRecordRequest {
+  string request_id = 1;
+  string code = 2;
+  string date = 3;
 }
 
 message DeleteAllRecordRequest {
