@@ -6,7 +6,7 @@ message MarketInfo {
   // key: code , example: 000001
   map<string, StockBasic>  stock_basics = 1;
   // key: date , format: YYYY-mm-dd
-  map<string, MarketDayRecord> market_recordes = 2;
+  map<string, MarketDayRecord> market_records = 2;
 }
 
 service Market {
@@ -127,10 +127,4 @@ message BasicIndex {
 message MarketDayRecord {
   // key: code
   map<string, BasicIndex> basic_indexs = 1;
-}
-
-// 市场所有交易日的基本记录
-message MarketRecords {
-  // key: date
-  map<string, MarketDayRecord> market_recodes= 1;
 }
