@@ -31,6 +31,7 @@ enum Code {
   OK = 0;
   ERROR = 1;
   NO_RECORD = 2;
+  REJECTED = 3;
 }
 
 message Status {
@@ -39,16 +40,13 @@ message Status {
   string description = 3;
 }
 
-message Bid {
-  string code = 1;
-  int64 volume = 2;
-  double price = 3;
-  BidType bid_type = 4;
-}
-
 message BidRequest {
   string request_id = 1;
-  Bid bid = 2;
+  string date = 2;
+  string code = 3;
+  int64 volume = 4;
+  double price = 5;
+  BidType bid_type = 6;
 }
 
 message BidResponse {
