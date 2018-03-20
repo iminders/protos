@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package dispatcher;
+
+service Dispatcher {
+  rpc CreateTask(CreateTaskRequest) returns (Status);
+  rpc DeleteTask(DeleteTaskRequest) returns (Status);
+  rpc PullTask(PullTaskRequest) returns (PullTaskResponse);
+  rpc UpdateTask(UpdateTaskRequest) returns (Status);
+  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse);
+}
+
+enum Code {
+  OK = 0;
+  ERROR = 1;
+}
+
+message Status {
+  Code code = 1;
+  string service = 2;
+  string description = 3;
+}
+
+enum TaskType {
+  DAY_INDEX = 0;
+  TICK = 1;
+  DAY_HISTORY = 2;
+}
+
+enum TaskStatus {
+  UNDISPATCHED = 0;
+  DISPATCHED = 1;
+  FINISHED = 2;
+  FAILED = 3;
+}
+
+message Task {
+  string id = 1;
+  int64 create_time_usec = 2;
+  int64 dispatch_time_usec = 3;
+  int64 finish_time_usec = 4;
+  int32 dispatched_count = 5;
+  TaskStatus task_status = 6;
+  TaskType task_type = 7;
+  string code = 8;
+  string date = 9;
+}
+
+message CreateTaskRequest {
+  string request_id = 1;
+  Task task = 2;
+}
+
+message DeleteTaskRequest {
+  string request_id = 1;
+  TaskType task_type = 2;
+  string task_id = 3;
+}
+
+message PullTaskRequest {
+  string request_id = 1;
+  TaskType task_type = 2;
+}
+
+message PullTaskResponse {
+  Status status = 1;
+  Task task = 2;
+}
+
+message UpdateTaskRequest {
+  string request_id = 1;
+  TaskType task_type = 2;
+  string task_id = 3;
+  TaskStatus task_status = 4;
+}
+
+message GetTasksRequest {
+  string request_id = 1;
+  TaskType task_type = 2;
+}
+
+message GetTasksResponse {
+  Status status = 1;
+  repeated Task tasks = 2;
+}
