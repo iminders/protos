@@ -36,9 +36,9 @@ enum TaskStatus {
 
 message Task {
   string id = 1;
-  int64 create_time_usec = 2;
-  int64 dispatch_time_usec = 3;
-  int64 finish_time_usec = 4;
+  int64 create_time_nanosec = 2;
+  int64 dispatch_time_nanosec = 3;
+  int64 finish_time_nanosec = 4;
   int32 dispatched_count = 5;
   TaskStatus task_status = 6;
   TaskType task_type = 7;
