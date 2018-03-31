@@ -42,8 +42,10 @@ message Task {
   int32 dispatched_count = 5;
   TaskStatus task_status = 6;
   TaskType task_type = 7;
-  string code = 8;
-  string date = 9;
+  int32 priority = 8;
+  string code = 9;
+  string date = 10;
+
 }
 
 message CreateTaskRequest {
