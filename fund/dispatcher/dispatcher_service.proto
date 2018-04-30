@@ -27,14 +27,13 @@ enum TaskType {
   DAY_HISTORY = 2;
 }
 
-enum TaskStatus {
-  UNDISPATCHED = 0;
-  DISPATCHED = 1;
-  FINISHED = 2;
-  FAILED = 3;
-}
-
 message Task {
+  enum TaskStatus {
+    UNDISPATCHED = 0;
+    DISPATCHED = 1;
+    FINISHED = 2;
+    FAILED = 3;
+  }
   string id = 1;
   int64 create_time_nanosec = 2;
   int64 dispatch_time_nanosec = 3;
